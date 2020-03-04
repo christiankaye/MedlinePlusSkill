@@ -1,0 +1,34 @@
+
+# This file details all external dependencies required by your skill. If your skill does
+# not require any dependencies, please delete this file before submitting a pull request.
+#
+# To use this file, uncomment the lines you need, and fill in the appropriate information.
+#
+# dependencies:
+from mycroft import MycroftSkill, intent_file_handler, intent_handler, \
+                    AdaptIntent
+from mycroft.util.log import LOG
+import requests
+import time
+#   # Pip dependencies on PyPI
+#   python:
+    - requests
+#     
+#
+#   # Install packages with the system package manager
+#   # This searches for the provided executable and uses the package names
+#   system:
+#     # For simple packages, this is all that is necessary
+#     all: pianobar piano-dev
+#
+#     # If the package has a certain name on a different platform:
+#     pkcon: pianobar libpiano-dev  # For the mycroft platform
+#     apt-get: pianobar libpiano-dev  # For Ubuntu/Debian
+#
+#   # Require certain executables to be in the PATH for the install to succeed
+#   exes:
+#     - pianobar
+#
+#   # Require the installation of other skills before installing this skill
+#   skill:
+#     - my-other-skill

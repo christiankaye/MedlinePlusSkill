@@ -1,5 +1,5 @@
 # <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Medline Plus
-Find medical information on MedlinePLus
+Find medical information on MedlinePlus
 
 ## About
 Learn about health topics, drugs, supplements and trustworthy medical information from medlineplus.gov

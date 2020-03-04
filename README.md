@@ -4,7 +4,7 @@ Find medical information on MedlinePLus
 ## About
 Learn about health topics, drugs, supplements and trustworthy medical information from medlineplus.gov
 
-find information on health conditions, wellness issues, and more in easy-to-read language on medlineplus, the up-to-date, trusted health information site from the nih and the national library of medicine.
+Find information on health conditions, wellness issues, medications and diseases in an easy-to-read language on medlineplus.gov, the up-to-date, trusted health information site from the NIH and the National Library of Medicine.
 
 ## Examples
 * "Tell me about heart disease."

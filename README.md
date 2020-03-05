@@ -1,10 +1,10 @@
 # <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Medline Plus
-Find medical information on MedlinePlus
+Find medical information on MedlinePLus
 
 ## About
 Learn about health topics, drugs, supplements and trustworthy medical information from medlineplus.gov
 
-Find information on health conditions, wellness issues, medications and diseases in an easy-to-read language on medlineplus.gov, the up-to-date, trusted health information site from the NIH and the National Library of Medicine.
+find information on health conditions, wellness issues, and more in easy-to-read language on medlineplus, the up-to-date, trusted health information site from the nih and the national library of medicine.
 
 ## Examples
 * "Tell me about heart disease."

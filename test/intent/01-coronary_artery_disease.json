@@ -1,0 +1,8 @@
+{
+  "utterance": "tell me about coronary artery disease",
+  "intent_type": "handle_medical_query",
+  "intent": {
+    "medlineplus": "tell me about",
+    "ArticleTitle": "coronary artery disease"
+  }
+}

@@ -2,9 +2,9 @@
 Goal: Retrieve and Report via Mycroft AI Consumer Health Information from the Mayo Clinic website.
 
 ## About
-Learn about health topics, drugs, supplements and trustworthy medical information from The Mayo Clinic.
+Learn about health topics, drugs, supplements and other trustworthy medical information from The Mayo Clinic.
 
-find information on health conditions, wellness issues, prevention, treatment and more in an easily understandable language from The Mayo Clinic, the up-to-date, trusted health information site.
+Find information on health conditions, signs and symptoms, wellness issues, prevention, treatment and more in easy to understand language from The Mayo Clinic, the timely, trusted health information site.
 
 ## Examples
 * "Tell me about heart disease."

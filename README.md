@@ -1,5 +1,5 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> MayoClinic
-Find medical information on MayoClinic.org
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Mayo Clinic Medical Skill
+Goal: Retrieve and Report via Mycroft AI Consumer Health Information from the Mayo Clinic website.
 
 ## About
 Learn about health topics, drugs, supplements and trustworthy medical information from The Mayo Clinic.

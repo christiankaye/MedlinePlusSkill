@@ -1,0 +1,19 @@
+MayoClinic Disease Format Headers (actual words)
+(paragraph labels as follows)
+
+Overview
+
+Symptoms
+
+Causes
+
+Risk Factors
+
+Complications
+
+Prevention
+
+(to get to the next page "diagnosis and treatment" one has to click on the heading "Diagnosis & Treatment")
+<a href="/diseases-conditions/heart-disease/diagnosis-treatment/drc-20353124" id="et_genericNavigation_diagnosis-treatment">Diagnosis &amp; treatment</a>
+
+

@@ -10,7 +10,7 @@ from mycroft import MycroftSkill, intent_file_handler, intent_handler, \
 from mycroft.util.log import LOG
 import requests
 import time
-Pip dependencies on PyPI import metapub
+import beautifulsoup
 #     
 #
 #   # Install packages with the system package manager

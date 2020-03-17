@@ -1,5 +1,5 @@
 # <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Medlineplus Skill
-Goal: Via Mycroft AI, Retrieve and Report Consumer Health Information from MedlinePlus.gov
+Goal: Retrieve and Report Consumer Health Information from MedlinePlus.gov with Mycroft AI.
 
 ## About
 Learn about health topics, drugs, supplements and other trustworthy medical information from MedlinePlus.

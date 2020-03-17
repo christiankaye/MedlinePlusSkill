@@ -1,7 +1,4 @@
-from mycroft import MycroftSkill, intent_file_handler, intent_handler, \
-                    AdaptIntent
-from mycroft.util.log import LOG
-import requests
-import time
-import urllib
-from bs4 import BeautifulSoup
+requests
+time
+urllib
+bs4

@@ -1,8 +1,8 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Mayo Clinic Medical Skill
-Goal: Retrieve and Report via Mycroft AI Consumer Health Information from the Mayo Clinic website.
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Medlineplus Skill
+Goal: Via Mycroft AI, Retrieve and Report Consumer Health Information from MedlinePlus.gov
 
 ## About
-Learn about health topics, drugs, supplements and other trustworthy medical information from The Mayo Clinic.
+Learn about health topics, drugs, supplements and other trustworthy medical information from MedlinePlus.
 
 Find information on health conditions, signs and symptoms, wellness issues, prevention, treatment and more in easy to understand language from The Mayo Clinic, the timely, trusted health information site.
 

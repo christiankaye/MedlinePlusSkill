@@ -8,15 +8,10 @@ Find information on health conditions, signs and symptoms, wellness issues, prev
 
 ## Examples
 * "Tell me about heart disease."
-* "Tell me about aspirin."
-* "What is CBD?
 * "Tell me about Hemoglobin A1C"
-* "What is this precription for?"
 * "What are the symptoms of a stroke?"
-* "Do I need a test for hearing loss?"
-* "How do I take a pulse?"
-* "What should i do if I am pregnant?"
-* "How do I stop bleeding?"
+* "Look up information on health and fitness"
+* "Find information about pregnancy"
 * "What is eczema?"
 
 ## Credits

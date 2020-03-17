@@ -3,5 +3,5 @@ from mycroft import MycroftSkill, intent_file_handler, intent_handler, \
 from mycroft.util.log import LOG
 import requests
 import time
-import urllib3
+import urllib
 from bs4 import BeautifulSoup

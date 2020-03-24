@@ -1,8 +1,8 @@
 {
-  "utterance": "tell me about coronary artery disease",
-  "intent_type": "handle_medical_query",
-  "intent": {
-    "medlineplus": "tell me about",
-    "ArticleTitle": "coronary artery disease"
+  "expected_dialog": "Find medical information about coronary artery disease",
+    "intent": {
+        "medlineplus": "coronary artery disease summary",
+    "intent_type": "medlineplus.intent",
+    "utterance": "Here is the informatioon about coronary artery disease"
   }
 }

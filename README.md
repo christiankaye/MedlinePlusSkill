@@ -1,17 +1,14 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> Medlineplus Skill
-Goal: Retrieve and Report Consumer Health Information from MedlinePlus.gov with Mycroft AI.
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/laptop-medical.svg" card_color="#22A7F0" width="50" height="50" style="vertical-align:bottom"/> MedlinePlug
+Find medical information on MedlinePlus.gov
 
 ## About
-Learn about health topics, drugs, supplements and other trustworthy medical information from MedlinePlus.
+Learn about health topics, drugs, supplements and trustworthy medical information from MedlinePlus.
 
-Find information on health conditions, signs and symptoms, wellness issues, prevention, treatment and more in easy to understand language from The Mayo Clinic, the timely, trusted health information site.
+find information on health conditions, wellness issues, and more in an easy-to-read language from MedlinePlus, the up-to-date, trusted health information site.
 
 ## Examples
 * "Tell me about heart disease."
-* "Tell me about Hemoglobin A1C"
-* "What are the symptoms of a stroke?"
-* "Look up information on health and fitness"
-* "Find information about pregnancy"
+* "Find information about health and fitness"
 * "What is eczema?"
 
 ## Credits

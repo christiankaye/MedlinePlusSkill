@@ -40,7 +40,7 @@ class Medlineplus(MycroftSkill):
         else:
             response = message.data.get("item")
         self.speak_dialog('let_me_find', data={"item": response})
-        index = self.get_index("https://medlineplus.gov/all_healthtopics/")
+        index = self.get_index("https://medlineplus.gov/all_healthtopics.html")
         result = match_one(response, list(index.keys()))
 
         if result[1] < 0.8:
@@ -62,7 +62,7 @@ class Medlineplus(MycroftSkill):
         else:
             item = self.settings.get('item')
             self.speak_dialog('continue', data={"item": item})
-            index = self.get_index("https://medlineplus.gov/all_healthtopics/")
+            index = self.get_index("https://medlineplus.gov/all_healthtopics.html")
             self.tell_item(index.get(item), self.settings.get('bookmark') - 1)
 
     def tell_item(self, url, bookmark):

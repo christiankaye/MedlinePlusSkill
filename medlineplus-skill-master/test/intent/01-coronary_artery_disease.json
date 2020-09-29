@@ -1,0 +1,8 @@
+{
+  "expected_dialog": "Find medical information about coronary artery disease",
+    "intent": {
+        "medlineplus": "coronary artery disease summary",
+    "intent_type": "medlineplus.intent",
+    "utterance": "Here is the informatioon about coronary artery disease"
+  }
+}

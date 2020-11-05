@@ -52,15 +52,8 @@ class medlineplusSkill(MycroftSkill):
             if len(results) == 0:
                 self.speak_dialog("no entry found")
                 return
-
-            # Xpath = /nlmSearchResult/list[@num="9"]/document[@rank="0"]//content[3]@name
-            # skip over <span class="qt0"> and similar text markup
-            # TO DO: FullSummary = remove HTML Tag
-
-            # Remember context and speech results
-            self.speak(FullSummary)
-
-        except web.exceptions.DisambiguationError as e:
+            
+except web.exceptions.DisambiguationError as e:
             # Test:  "tell me about Coronary Artery Disease"
             options = e.options[:5]
 
@@ -134,5 +127,41 @@ class medlineplusSkill(MycroftSkill):
         summary = [/nlmSearchResult/list[@num="9"]/document[@rank="0"]//content[3]@name]
         return True
 
-   def create_skill():
+def remove_tags(text):
+    return ''.join(xml.etree.ElementTree.fromstring("<dummy_tag>" + text +"</dummy_tag>").itertext())
+
+def medlinePlus_query(search_terms):
+    # Specify the base
+    root_url = 'https://wsearch.nlm.nih.gov/ws/query'
+    term_delimiter = '+'
+    keywords = term_delimiter.join(search_terms.split(' '))
+
+    search_url = '%s?db=%s&term="%s"' % (root_url, 'healthTopics', keywords)
+
+    # Create our results list which we'll populate.
+    results = []
+
+    try:
+        # Connect to the server and read the response generated.
+        response = urllib2.urlopen(search_url).read()
+        
+        e = xml.etree.ElementTree.fromstring(response)
+        for doc in e.iter('document'):
+            title = ''
+            summary = ''
+            for content in doc.iter('content'):
+                if content.get('name') == 'title':
+                    title = content.text
+                elif content.get('name') == 'FullSummary':
+                    summary = content.text
+
+            entry = {
+                'title': remove_tags(title),
+                'link': doc.get('url'),
+                'summary': remove_tags(summary)
+            }
+
+            results.append(entry) 
+
+def create_skill():
     return medlineplus()

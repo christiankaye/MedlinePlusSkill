@@ -1,9 +1,9 @@
 """
 skill medlineplus
-Copyright (C) 2020  TheNurse
+Copyright (C) 2020 TheNurse
 
 This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
+it under the summarys of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
@@ -16,32 +16,70 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from mycroft import MycroftSkill, intent_file_handler
-from mycroft.util.parse import match_one
+from adapt.intent import IntentBuilder
+from mycroft.skills.core import MycroftSkill, intent_handler
+from mycroft.util.parse import LOG
 from mycroft.audio import wait_while_speaking
+import xml.etree.ElementTree as xml
 import requests
-from bs4 import BeautifulSoup
 import time
 
+# https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=full-summary:<search term>&retmax=1
 
-class Medlineplus(MycroftSkill):
+link = "https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=full-summary:{term}&retmax=1".format(
+        nlmSearchResult
+    )
+
+class medlineplusSkill(MycroftSkill):
     def __init__(self):
-        MycroftSkill.__init__(self)
+        super(medlineplusSkill, self).__init__(name="medlineplusSkill")
 
-    def initialize(self):
-        self.is_reading = False
+    @intent_handler(IntentBuilder("").require("medlineplus").
+                    require("FullSummary"))
+    def handle_intent(self, message):
+        # Extract what the user asked about
+        self._lookup(message.data.get("FullSummary"))
 
-    @intent_file_handler('medlineplus.intent')
-    def handle_medlineplus(self, message):
-        if message.data.get("item") is None:
-            response = self.get_response('medlineplus', num_retries=0)
-            if response is None:
+     def _lookup(self, search):
+        try:
+            # the base url is https://wsearch.nlm.nih.gov/ws/query
+            # Talk to the user, as this can take a little time...
+            self.speak_dialog("searching", {"term": search})
+
+            # First step is to get the xml search results.  
+            # results come back in a specific format
+            results = web.search(search, 1)
+            if len(results) == 0:
+                self.speak_dialog("no entry found")
                 return
-        else:
-            response = message.data.get("item")
-        self.speak_dialog('let_me_find', data={"item": response})
-        index = self.get_index("https://medlineplus.gov/all_healthtopics.html")
-        result = match_one(response, list(index.keys()))
+
+            # Xpath = /nlmSearchResult/list[@num="9"]/document[@rank="0"]//content[3]@name
+            # skip over <span class="qt0"> and similar text markup
+            # TO DO: FullSummary = remove HTML Tag
+
+            # Remember context and speech results
+            self.speak(FullSummary)
+
+        except web.exceptions.DisambiguationError as e:
+            # Test:  "tell me about Coronary Artery Disease"
+            options = e.options[:5]
+
+            option_list = (", ".join(options[:-1]) + " " +
+                           self.translate("or") + " " + options[-1])
+            choice = self.get_response('disambiguate',
+                                       data={"options": option_list})
+            if choice:
+                self._lookup(choice)
+
+        except Exception as e:
+            LOG.error("Error: {0}".format(e))
+        
+        try:
+            self._lookup(search)
+        except .PageError:
+            self._lookup(search, auto_suggest=False)
+        except Exception as e:
+            self.log.error("Error: {0}".format(e))
 
         if result[1] < 0.8:
             self.speak_dialog('that_would_be', data={"item": result[0]})
@@ -62,24 +100,15 @@ class Medlineplus(MycroftSkill):
         else:
             item = self.settings.get('item')
             self.speak_dialog('continue', data={"item": item})
-            index = self.get_index("https://medlineplus.gov/all_healthtopics.html")
-            self.tell_item(index.get(item), self.settings.get('bookmark') - 1)
-
-    def tell_item(self, url, bookmark):
-        self.is_reading = True
-        self.settings['bookmark'] = bookmark
-        if bookmark == 0:
-            title = self.get_title(url)
-            author = self.get_author(url)
-            self.speak_dialog('title_by_author', data={'title': title, 'author': author})
-            time.sleep(1)
+            
+   
         lines = self.get_item(url)
         for line in lines[bookmark:]:
-            self.settings['bookmark'] += 1
+            
             time.sleep(.5)
             if self.is_reading is False:
                 break
-            sentenses = line.split('. ')
+            sentences = line.split('. ')
             for sentens in sentenses:
                 if self.is_reading is False:
                     break
@@ -88,7 +117,6 @@ class Medlineplus(MycroftSkill):
                     self.speak(sentens, wait=True)
         if self.is_reading is True:
             self.is_reading = False
-            self.settings['bookmark'] = 0
             self.settings['item'] = None
             time.sleep(2)
             self.speak_dialog('from_medlineplus')
@@ -101,35 +129,10 @@ class Medlineplus(MycroftSkill):
         else:
             return False
 
-    def get_soup(self, url):
-        try:
-            return BeautifulSoup(requests.get(url).text, "html.parser")
-        except Exception as SockException:
-            self.log.error(SockException)
-
     def get_item(self, url):
-        soup = self.get_soup(url)
-        lines = [a.text.strip() for a in soup.find(id="item").find_all("p")[1:]]
-        lines = [l for l in lines if not l.startswith("{") and not l.endswith("}")]
-        return lines
+        
+        summary = [/nlmSearchResult/list[@num="9"]/document[@rank="0"]//content[3]@name]
+        return True
 
-    def get_title(self, url):
-        soup = self.get_soup(url)
-        title = [a.text.strip() for a in soup.findAll("item")][0]
-        return title
-
-    def get_author(self, url):
-        soup = self.get_soup(url)
-        author = [a.text.strip() for a in soup.findAll("div", {"class": "item"})][0]
-        return str(author).split("  ")[0]
-
-    def get_index(self, url):
-        soup = self.get_soup(url)
-        index = {}
-        for link in soup.find(id="main").find_all('a'):
-            index.update({link.text[2:]: link.get("href")})
-        return index
-
-
-def create_skill():
-    return Medlineplus
+   def create_skill():
+    return medlineplus()

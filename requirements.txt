@@ -1,1 +1,7 @@
-bs4
+from adapt.intent import IntentBuilder
+from mycroft.skills.core import MycroftSkill, intent_handler
+from mycroft.util.parse import LOG
+from mycroft.audio import wait_while_speaking
+import xml.etree.ElementTree as xml
+import requests
+import time

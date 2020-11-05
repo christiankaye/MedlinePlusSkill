@@ -40,7 +40,7 @@ class medlineplusSkill(MycroftSkill):
         # Extract what the user asked about
         self._lookup(message.data.get("FullSummary"))
 
-     def _lookup(self, search):
+    def _lookup(self, search):
         try:
             # the base url is https://wsearch.nlm.nih.gov/ws/query
             # Talk to the user, as this can take a little time...
@@ -53,7 +53,7 @@ class medlineplusSkill(MycroftSkill):
                 self.speak_dialog("no entry found")
                 return
             
-except web.exceptions.DisambiguationError as e:
+        except web.exceptions.DisambiguationError as e:
             # Test:  "tell me about Coronary Artery Disease"
             options = e.options[:5]
 
@@ -69,7 +69,7 @@ except web.exceptions.DisambiguationError as e:
         
         try:
             self._lookup(search)
-        except .PageError:
+        except PageError:
             self._lookup(search, auto_suggest=False)
         except Exception as e:
             self.log.error("Error: {0}".format(e))
@@ -123,12 +123,19 @@ except web.exceptions.DisambiguationError as e:
             return False
 
     def get_item(self, url):
+        e = xml.etree.ElementTree.fromstring(response)
+        for doc in e.iter('document'):
+            title = ''
+            summary = ''
+            for content in doc.iter('content'):
+                if content.get('name') == 'title':
+                    title = content.text
+                elif content.get('name') == 'FullSummary':
+                    summary = content.text
         
-        summary = [/nlmSearchResult/list[@num="9"]/document[@rank="0"]//content[3]@name]
-        return True
-
-def remove_tags(text):
-    return ''.join(xml.etree.ElementTree.fromstring("<dummy_tag>" + text +"</dummy_tag>").itertext())
+       
+    def remove_tags(text):
+        return ''.join(xml.etree.ElementTree.fromstring("<dummy_tag>" + text +"</dummy_tag>").itertext())
 
 def medlinePlus_query(search_terms):
     # Specify the base
@@ -161,7 +168,8 @@ def medlinePlus_query(search_terms):
                 'summary': remove_tags(summary)
             }
 
-            results.append(entry) 
-
+            results.append(entry)
+                
+            
 def create_skill():
     return medlineplus()

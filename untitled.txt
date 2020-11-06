@@ -1,4 +1,0 @@
-<a class="html-attribute-value html-external-link" target="_blank" href="https://medlineplus.gov/a1c.html" rel="noreferrer noopener">https://medlineplus.gov/a1c.html</a>
-
-
-<a class="html-attribute-value html-external-link" target="_blank" href="https://medlineplus.gov/alcohol.html" rel="noreferrer noopener">https://medlineplus.gov/alcohol.html</a>

@@ -15,8 +15,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from mycroft import MycroftSkill, intent_file_handler
-from mycroft.util.parse import LOG
+from adapt.intent import IntentBuilder
+from mycroft.skills.core import MycroftSkill, intent_handler
+from mycroft.util.log import LOG
 from mycroft.audio import wait_while_speaking
 import xml.etree.ElementTree as xml
 import requests

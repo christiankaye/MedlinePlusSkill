@@ -171,4 +171,4 @@ def medlinePlus_query(search_terms):
                 
             
 def create_skill():
-    return medlineplus()
+    return medlineplusSkill()

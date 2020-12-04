@@ -169,6 +169,5 @@ def medlinePlus_query(search_terms):
 
 	results.append(entry)
 
-
 def create_skill():
 	return medlineplusSkill()

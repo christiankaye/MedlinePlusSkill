@@ -1,165 +1,74 @@
 """
 skill medlineplus
-Copyright (C) 2020 TheNurse
-
+Copyright (C) 2021 The Nurse
 This program is free software: you can redistribute it and/or modify
-it under the summarys of the GNU General Public License as published by
+it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-from adapt.intent import IntentBuilder
-from mycroft.skills.core import MycroftSkill, intent_handler
-from mycroft.util.log import LOG
+# import libraries
+
+from mycroft import MycroftSkill, intent_file_handler
+from mycroft.util.parse import match_one
 from mycroft.audio import wait_while_speaking
-import xml.etree.ElementTree as xml
 import requests
+from bs4 import BeautifulSoup
 import time
 
 
-class medlineplusSkill(MycroftSkill):
-	def __init__(self):
-		super(medlineplusSkill, self).__init__(name="medlineplusSkill")
-		
-    def initialize(self):
-        self.is_reading = False
-
-    @intent_file_handler('medline.intent')
-    def handle_fairytalez(self, message):
-        if message.data.get("FullSummary") is none:
-            response = self.get_response('medlineplus', num_retries=0)
+class MedlinePlus(MycroftSkill):
+    def __init__(self):
+    super(MedlinePlusSkill, self).__init__(name="MedlinePlusSkill")
+    
+    # Initialize working variables used within the skill.
+    self.count = 0
+         
+    @intent_handler(IntentBuilder().require("MedlinePlus"))
+    def handle_medlineplus_intent(self, message):
+        self.speak_dialog("let_me_find")
+        # medlineplus refers to the topic-summary defined by the disease on medlineplus.gov
+			if message.data.get("MedlinePlus") is None:
+            response = self.get_response('notfound', num_retries=0)
             if response is None:
-                return
-        else:
-            response = message.data.get("FullSummary")
-	def _lookup(self, search):
-        try:
-		# the base url is https://wsearch.nlm.nih.gov/ws/query
-		# Talk to the user, as this can take a little time...
-		self.speak_dialog("searching", {"term": search})
-        # Mycroft speaks from dialog folder
-        # Mycroft recognizes commands in vocab folder
-		# First step is to get the xml search results.  
-		# results come back in a specific format
-		results = web.search(search, 1)
-		if len(results) == 0:
-            self.speak_dialog("no entry found")
-            return
-            except web.exceptions.DisambiguationError as e:
-            # Test:  "tell me about Coronary Artery Disease"
-		options = e.options[:5]
-
-		option_list = (", ".join(options[:-1]) + " " +
-			self.translate("or") + " " + options[-1])
-                choice = self.get_response('disambiguate',
-                data={"options": option_list})
-			if choice:
-                self._lookup(choice)
-            except Exception as e:
-                LOG.error("Error: {0}".format(e))
+               return
+         else:
+            response = message.data.get("MedlinePlus")
+        self.speak_dialog('found', data={"disease": response})
+          else:
             try:
-                self._lookup(search)
-            except PageError:
-            self._lookup(search, auto_suggest=False)
-            except Exception as e:
-            self.log.error("Error: {0}".format(e))
-            if result[1] < 0.8:
-            self.speak_dialog('that_would_be', data={"item":              result[0]})
-            response = self.ask_yesno('is_it_that')
-            if response != 'yes':
-                self.speak_dialog('no_item')
-            return
-            self.speak_dialog('i_know_that', data={"item": result[0]})
-            # self.log.info(result + " " + result[0])
-            self.settings['item'] = result[0]
-            time.sleep(3)
-            self.tell_item(index.get(result[0]), 0)
+                url = "https://medlineplus.gov/{disease}.html"
+                html_content = requests.get(url).text
+                soup = BeautifulSoup(html_content, "html5lib")
+                main_class = soup.find("div",id="topic-summary")
+                link = main_class.find("a")
+                res = main_class.text
+                self.result.append(str(res))
+                           med
+	def get_soup(self, url):
+        try:
+            return BeautifulSoup(requests.get(url).text, "html.parser")
+        except Exception as SockException:
+            self.log.error(SockException)
 
-	@intent_file_handler('continue.intent')
-	def handle_continue(self, message):
-		if self.settings.get('item') is None:
-		self.speak_dialog('no_item_to_continue')
-		else:
-		item = self.settings.get('item')
-		self.speak_dialog('continue', data={"item": item})
-            
-		lines = self.get_item(url)
-		for line in lines[bookmark:]:
-			time.sleep(.5)
-		if self.is_reading is False:
-			break
-			sentences = line.split('. ')
-			for sentens in sentenses:
-			if self.is_reading is False:
-			break
-		else:
-			wait_while_speaking()
-			self.speak(sentens, wait=True)
-		if self.is_reading is True:
-			self.is_reading = False
-			self.settings['item'] = None
-			time.sleep(2)
-			self.speak_dialog('from_medlineplus')
-
-	def stop(self):
-		self.log.info('stop is called')
-		if self.is_reading is True:
-			self.is_reading = False
-			return True
-		else:
-			return False
-
-	def get_item(self, url):
-		e = xml.etree.ElementTree.fromstring(response)
-		for doc in e.iter('document'):
-			title = ''
-			summary = ''
-		for content in doc.iter('content'):
-		if content.get('name') == 'title':
-			title = content.text
-		elif content.get('name') == 'FullSummary':
-			summary = content.text
+    def get_summary(self, url):
+        soup = self.get_soup(url)
+        lines = [a.text.strip() for a in soup.find(id='summary-title')
+        return lines
         
-       
-	def remove_tags(text):
-	return ''.join(xml.etree.ElementTree.fromstring("<dummy_tag>" + text +"</dummy_tag>").itertext())
-
-def medlinePlus_query(search_terms):
-	# Specify the base
-	root_url = 'https://wsearch.nlm.nih.gov/ws/query'
-	term_delimiter = '+'
-	keywords = term_delimiter.join(search_terms.split(' '))
-	search_url = '%s?db=%s&term="%s"' % (root_url, 'healthTopics', keywords)
-	# Create our results list which we'll populate.
-	results = []
-
-	try:
-	# Connect to the server and read the response generated.
-        response = urllib2.urlopen(search_url).read()
-
-        e = xml.etree.ElementTree.fromstring(response)
-	for doc in e.iter('document'):
-		title = ''#800080
-		summary = ''
-	for content in doc.iter('content'):
-	if content.get('name') == 'title':
-		title = content.text
-	elif content.get('name') == 'FullSummary':
-		summary = content.text
-        entry = {
-        'title': remove_tags(title),
-        'link': doc.get('url'),
-        'summary': remove_tags(summary)
-        }
-        results.append(entry)
-	
+	def stop(self):
+        self.log.info('stop is called')
+        if self.is_reading is True:
+            self.is_reading = False
+            return True
+        else:
+            return False
 
 def create_skill():
-	return medlineplusSkill()
+    return MedlinePlusSkill()

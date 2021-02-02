@@ -5,7 +5,7 @@ Medical information from MedlinePlus.gov and MycroftAI
 Find information on health conditions, wellness issues, and more in an easy-to-read language from MedlinePlus, the up-to-date, trusted health information site.
 
 ## Credits
-Christian Kaye, Shahin Sha
+Christian Kaye, Shahin Sha and the helpful Mycroft community
 
 ## Examples
 * "Tell me about heart disease."

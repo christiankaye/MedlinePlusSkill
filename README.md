@@ -13,7 +13,8 @@ Christian Kaye, Shahin Sha and the helpful Mycroft community
 * "What is eczema?"
 
 ## To Install
-Mycroft users: Install with the "msm install" or "git clone" if preferred.
+Mycroft users: Install with the "msm install" or "git clone" if preferred."
+"msm install https://github.com/christiankaye/MedlinePlusSkill.git
 
 ## Category
 **Information**

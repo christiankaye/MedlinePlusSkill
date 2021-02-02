@@ -9,8 +9,8 @@ Find information on health conditions, wellness issues, and more in an easy-to-r
 * "Find information about health and fitness"
 * "What is eczema?"
 
-## Credits
-Christian Kaye
+## To Install
+Mycroft users: Install with the "msm install" or "git clone" if preferred.
 
 ## Category
 **Information**

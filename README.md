@@ -8,7 +8,7 @@ Find information on health conditions, wellness issues, and more in an easy-to-r
 Christian Kaye, Shahin Sha and the helpful Mycroft community
 
 ## Examples
-* "Tell me about heart disease."
+* "Search Medline for heart disease."
 * "Find information about health and fitness"
 * "What is eczema?"
 

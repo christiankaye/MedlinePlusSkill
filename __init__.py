@@ -30,7 +30,7 @@ class MedlinePlus(MycroftSkill):
     # Initialize working variables used within the skill.
     self.count = 0
          
-    @intent_handler(IntentBuilder().require("MedlinePlus"))
+    @intent_handler(IntentBuilder().require("medline.intent"))
     def handle_medlineplus_intent(self, message):
         self.speak_dialog("let_me_find")
         # medlineplus refers to the topic-summary defined by the disease on medlineplus.gov

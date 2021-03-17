@@ -50,7 +50,7 @@ class MedlinePlus(MycroftSkill):
                 link = main_class.find("a")
                 res = main_class.text
                 self.result.append(str(res))
-                           med
+
 	def get_soup(self, url):
         try:
             return BeautifulSoup(requests.get(url).text, "html.parser")

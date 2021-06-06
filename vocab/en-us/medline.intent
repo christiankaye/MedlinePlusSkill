@@ -1,7 +1,4 @@
-medline
-medlineplus
-sign
-signs
-symptom
-symptoms
-
+look up {topic} on medline
+get me medline information (on|about) {topic}
+get me information (on|about) {topic} from medline
+tell me about {topic} on medline

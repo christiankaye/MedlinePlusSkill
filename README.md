@@ -9,8 +9,8 @@ Find information on health conditions, wellness issues, and more in an easy-to-r
 Christian Kaye, Shahin Sha and the helpful Mycroft community
 
 ## Examples
-* "Search Medline for heart disease."
-* "Find information on about health and fitness on Medline"
+* "Look up (diabetes) on Medline"
+* "Get me information (on|about) {cancer} from medline"
 
 ## To Install
 Mycroft users: Install with the "msm install" or "git clone" if preferred."

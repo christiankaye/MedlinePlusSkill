@@ -20,7 +20,7 @@ from mycroft.util.parse import match_one
 from mycroft.audio import wait_while_speaking
 import requests
 from bs4 import BeautifulSoup
-import time
+from mycroft import MycroftSkill, intent_handler
 
 
 class MedlinePlus(MycroftSkill):

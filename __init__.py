@@ -22,7 +22,6 @@ import requests
 from bs4 import BeautifulSoup
 from mycroft import MycroftSkill, intent_handler
 
-
 class MedlinePlusSkill(MycroftSkill):
 
     @intent_handler("medline.intent")
@@ -48,5 +47,5 @@ class MedlinePlusSkill(MycroftSkill):
             except:
                 pass
 
-def create_skill():
-    return MedlinePlusSkill()
+    def create_skill():
+        return MedlinePlusSkill()
